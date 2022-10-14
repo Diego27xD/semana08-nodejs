@@ -5,17 +5,10 @@ const prisma = new PrismaClient();
 export const findAll = async (req, res) => {
     try {
         const list = await prisma.playlist.findMany();
-        const { idSong } = list
-        const song = await prisma.song.findMany({
-            where:{
-                id: Number(idSong)
-            }
-        })
 
         res.status(200).json({
             ok:true,
             data: list,
-            song: song
         })
     } catch (error) {
         res.json({
